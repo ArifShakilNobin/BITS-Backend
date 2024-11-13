@@ -1,0 +1,4 @@
+package org.bits.service.Security.config;
+
+public class SwaggerConfig {
+}

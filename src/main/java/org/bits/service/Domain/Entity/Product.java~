@@ -1,0 +1,4 @@
+package org.bits.service.Domain.Entity;
+
+public class Product {
+}

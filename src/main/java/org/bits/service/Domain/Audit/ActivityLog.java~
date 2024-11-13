@@ -1,0 +1,4 @@
+package org.bits.service.Domain.Audit;
+
+public class ActivityLog {
+}

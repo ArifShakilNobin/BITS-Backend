@@ -1,0 +1,4 @@
+package org.bits.service.Domain.Request;
+
+public class LoginRequest {
+}

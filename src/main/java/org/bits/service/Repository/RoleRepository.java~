@@ -1,0 +1,4 @@
+package org.bits.service.Repository;
+
+public interface RoleRepository {
+}

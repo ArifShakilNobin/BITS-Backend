@@ -1,0 +1,4 @@
+package org.bits.service.Service;
+
+public class AuditService {
+}

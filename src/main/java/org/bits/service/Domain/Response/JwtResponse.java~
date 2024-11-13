@@ -1,0 +1,4 @@
+package org.bits.service.Domain.Response;
+
+public class JwtResponse {
+}
