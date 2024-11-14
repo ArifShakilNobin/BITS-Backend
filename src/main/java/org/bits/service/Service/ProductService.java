@@ -38,17 +38,25 @@ public class ProductService {
     }
 
     public ResponseEntity<?> updateProduct(Product product) {
-        Product existingProduct = productRepository.findById(product.getId()).orElse(null);
+        // Find the existing product by ID
+        Optional<Product> optionalProduct = productRepository.findById(product.getId());
 
-        if (existingProduct == null) {
+        // Check if product with given ID exists
+        if (optionalProduct.isEmpty()) {
             return ResponseEntity.notFound().build();
-        }else if(Objects.equals(existingProduct.getId(), product.getId())){
-            existingProduct.setName(product.getName());
-            existingProduct.setPrice(product.getPrice());
-            productRepository.save(existingProduct);
         }
+
+        // Update fields in the existing product
+        Product existingProduct = optionalProduct.get();
+        existingProduct.setName(product.getName());
+        existingProduct.setPrice(product.getPrice());
+
+        // Save the updated product (JPA will update instead of insert since the ID is present)
+        productRepository.save(existingProduct);
+
         return ResponseEntity.ok(existingProduct);
     }
+
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
