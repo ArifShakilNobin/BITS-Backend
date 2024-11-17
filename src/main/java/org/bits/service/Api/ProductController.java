@@ -20,29 +20,36 @@ public class ProductController {
 
 
     @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody @Valid Product product) {
-        return productService.saveProduct(product);
+    public ResponseEntity<ApiResponse> createProduct(@RequestBody Product product) {
+        Product createdProduct = productService.saveProduct(product);
+        return ResponseEntity.ok(new ApiResponse(true, "Product Saved Successfully", createdProduct));
+
+
     }
 
     @GetMapping
     public ResponseEntity<ApiResponse> getAllProducts() {
         List<Product> products = productService.getAllProducts();
-        ApiResponse response = new ApiResponse(true, "Products fetched successfully", products);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new ApiResponse(true, "Product List Retrieved Successfully", products));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getProductById(@PathVariable Long id) {
-        return productService.getProductById(id);
+    public ResponseEntity<ApiResponse> getProductById(@PathVariable Long id) {
+        Product product = productService.getProductById(id);
+        return ResponseEntity.ok(new ApiResponse(true, "Product Found Successfully", product));
     }
 
-    @PutMapping
-    public ResponseEntity<?> updateProduct(@RequestBody Product product) {
-        return productService.updateProduct(product);
-    }
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse> updateProduct(@RequestBody Product updatePproduct, @PathVariable Long id) {
+        Product product = productService.updateProduct(id, updatePproduct);
+        return ResponseEntity.ok(new ApiResponse(true, "product Updated Successfully", product));
 
+    }
     @DeleteMapping("/{id}")
-    public ApiResponse deleteProduct(@PathVariable Long id) {
-        return productService.deleteProduct(id);
+    public ResponseEntity<ApiResponse> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.ok(new ApiResponse(true, "Product Deleted Successfully"));
+
+
     }
 }
